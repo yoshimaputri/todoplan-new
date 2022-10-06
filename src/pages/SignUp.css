@@ -1,0 +1,65 @@
+.sign-up h3 {
+    padding-top: 5%;
+    padding-bottom: 2%;
+    font-size: 18px;
+    color: rgb(187, 50, 50);
+}
+
+.sign-up .cards {
+    padding: 0;
+    background: #fff;
+}
+
+.sign-up .form-group {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    margin: 0;
+    justify-content: center;
+}
+
+.sign-up input,
+select {
+    width: 90%;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    margin: 5px;
+    margin-bottom: 2%;
+    /* border: 1px solid black; */
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid #c0bebe;
+    font-size: 14px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+}
+
+.sign-up input:focus {
+    border-bottom: rgb(75, 42, 42);
+    border: none;
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmPass {
+    background-color: #f0f0f0;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 2%;
+    height: fit-content;
+    width: fit-content;
+}
+
+#transition-modal-description {
+    padding-top: 3%;
+    color: rgb(75, 75, 75);
+}
+
+
+.form-group select {
+    border: 1px solid rgba(78, 40, 40, 0.3);
+}
