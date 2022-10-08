@@ -11,7 +11,7 @@ import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import { IoCreateOutline } from 'react-icons/io5';
-import { AiFillDelete, AiOutlineSearch, AiOutlineDelete } from 'react-icons/ai';
+import { AiFillDelete, AiOutlineSearch, AiOutlineDelete, AiTwotoneDollar } from 'react-icons/ai';
 import { VscDiffAdded } from 'react-icons/vsc';
 import { GrPowerReset } from 'react-icons/gr';
 import { GiCancel } from 'react-icons/gi';
@@ -41,6 +41,22 @@ const Todo = () => {
         window.location.reload();
     }
 
+    const remind = (todo) => {
+        let body = JSON.stringify({
+            title: todo.title,
+            body: todo.contents,
+            remindAt: todo.remindAt
+        })
+
+        fetch("http://localhost:3001/remind", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: body
+        })
+    }
+
     const handleCloseForm = () => {
         openForm(false);
         setTodo((r) => ({ ...r, id: "", title: "", contents: "", remindAt: "" }));
@@ -64,12 +80,13 @@ const Todo = () => {
             authorId: user.id,
             title: title,
             contents: contents,
-            remindAt: remindAt,
+            remindAt: moment(remindAt).unix(),
             createdAt: Date.now(),
             updatedAt: Date.now(),
             deletedAt: null,
         }
         todoList.push(newTodo);
+        remind(newTodo);
         saveLocalStorage();
     };
 

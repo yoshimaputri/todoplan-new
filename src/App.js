@@ -5,6 +5,8 @@ import { Navbar } from "./components";
 import { Home, SignIn, SignUp } from './pages';
 
 function App() {
+  
+
   return (
     <BrowserRouter>
       <Navbar></Navbar>

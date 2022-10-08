@@ -70,3 +70,42 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+// Immediately take control of the page, see the 'Immediate Claim' recipe
+// for a detailed explanation of the implementation of the following two
+// event listeners.
+
+self.addEventListener('install', function(event) {
+  event.waitUntil(self.skipWaiting());
+  console.log('install')
+});
+
+self.addEventListener('activate', function(event) {
+  console.log('activate')
+  event.waitUntil(self.clients.claim());
+});
+
+// Register event listener for the 'push' event.
+self.addEventListener('push', function(event) {
+    let notifData = event.data.json()
+    console.log(notifData)
+    return self.registration.showNotification(notifData.title, {
+      body: notifData.body,
+    });
+});
+
+// Register event listener for the 'notificationclick' event.
+self.addEventListener('notificationclick', function(event) {
+  event.waitUntil(
+    // Retrieve a list of the clients of this service worker.
+    self.clients.matchAll().then(function(clientList) {
+      // If there is at least one client, focus it.
+      if (clientList.length > 0) {
+        return clientList[0].focus();
+      }
+
+      // Otherwise, open a new page.
+      return self.clients.openWindow('../push-clients_demo.html');
+    })
+  );
+});
